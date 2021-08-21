@@ -25,6 +25,12 @@ class MyApp extends StatelessWidget {
                   onPressed: () async {
                     await BarangServices.insertData(
                         BarangModel("2", "test", 9));
+                  }),
+              RaisedButton(
+                  child: Text("Remove data"),
+                  onPressed: () async {
+                    await BarangServices.removeData(
+                        BarangModel("2", "test", 9));
                   })
             ],
           ),
