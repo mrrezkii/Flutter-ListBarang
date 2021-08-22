@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:list_harga_barang/model/models.dart';
-import 'package:list_harga_barang/services/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:list_harga_barang/ui/pages/pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,34 +9,22 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<Widget> widgets = [];
+  int counter = 1;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RaisedButton(
-                  child: Text("Insert data"),
-                  onPressed: () async {
-                    await BarangServices.insertData(
-                        BarangModel("2", "test", 9));
-                  }),
-              RaisedButton(
-                  child: Text("Remove data"),
-                  onPressed: () async {
-                    await BarangServices.removeData(
-                        BarangModel("2", "test", 9));
-                  })
-            ],
-          ),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      home: MainPage(),
     );
   }
 }
-
