@@ -2,7 +2,7 @@ part of 'pages.dart';
 
 class MainPage extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController ageController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +45,12 @@ class MainPage extends StatelessWidget {
                             TextField(
                               style: GoogleFonts.poppins(),
                               controller: nameController,
-                              decoration: InputDecoration(hintText: "Name"),
+                              decoration: InputDecoration(hintText: "Nama"),
                             ),
                             TextField(
                               style: GoogleFonts.poppins(),
-                              controller: ageController,
-                              decoration: InputDecoration(hintText: "Age"),
+                              controller: priceController,
+                              decoration: InputDecoration(hintText: "Harga"),
                               keyboardType: TextInputType.number,
                             ),
                           ],
@@ -70,8 +70,16 @@ class MainPage extends StatelessWidget {
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
-                            onPressed: () {
-                              //// ADD DATA HERE
+                            onPressed: () async {
+                              await BarangServices.insertData(BarangModel(
+                                  DateTime.now()
+                                      .millisecondsSinceEpoch
+                                      .toString(),
+                                  nameController.text,
+                                  int.tryParse(priceController.text) ?? 0));
+
+                              nameController.text = '';
+                              priceController.text = '';
                             }),
                       )
                     ],
